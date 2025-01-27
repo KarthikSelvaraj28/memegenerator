@@ -1,0 +1,227 @@
+/* Universal Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body Styling */
+body {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Main Container */
+main {
+  background-color: #222;
+  padding: 40px;
+  width: 85%;
+  max-width: 900px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  animation: fade-in 1.5s ease-out;
+}
+
+/* Fade-in Animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  padding: 20px;
+  border-radius: 15px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.headerimage {
+  width: 60px;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.headertitle {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 1.8px;
+}
+
+.headercontent {
+  font-size: 18px;
+}
+
+/* Form Section */
+.form {
+  width: 100%;
+  display: grid;
+  gap: 20px;
+}
+
+.form--input {
+  border: 1px solid #444;
+  border-radius: 15px;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #333;
+  color: #fff;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.form--input:focus {
+  box-shadow: 0 0 12px #61dafb;
+  transform: scale(1.05);
+  outline: none;
+}
+
+.form--button {
+  background: linear-gradient(135deg, #00c9ff, #92fe9d);
+  color: #000;
+  border: none;
+  border-radius: 15px;
+  padding: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.form--button:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 12px 25px rgba(0, 255, 200, 0.7);
+}
+
+/* Meme Section */
+.meme {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  animation: pop-in 1.5s ease-out;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.8) rotate(-5deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+.meme--image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.meme:hover .meme--image {
+  transform: scale(1.1);
+}
+
+.meme--text {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  font-family: "Impact", sans-serif;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+  font-size: 1.6rem;
+}
+
+.meme--text.top {
+  top: 15px;
+}
+
+.meme--text.bottom {
+  bottom: 15px;
+}
+
+/* Download Button */
+.download-button {
+  background: linear-gradient(135deg, #ff5f6d, #ffc371);
+  color: #000;
+  font-size: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 15px rgba(255, 95, 109, 0.7);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(255, 195, 113, 1);
+  }
+}
+
+.download-button:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 12px 25px rgba(255, 95, 109, 0.7);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  main {
+    width: 95%;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .meme {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .form--button,
+  .download-button {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
