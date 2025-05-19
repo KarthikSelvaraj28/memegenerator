@@ -1,4 +1,4 @@
-name: Deploy to AWS Elastic Beanstalk
+name: Deploy React app to AWS Elastic Beanstalk
 
 on:
   push:
@@ -21,24 +21,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
+      - name: Build React app
         run: npm run build
 
-      - name: Move build files to root
+      - name: Package build folder
         run: |
-          mkdir server
-          cp -r build server/
-          cp server.js server/
-          cd server
-          zip -r ../deploy.zip .
-      
+          cd build
+          zip -r ../deploy.zip .  # zip contents of build folder (not folder itself)
+          cd ..
+
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: CICDfirstexample
-          environment_name: CICDfirstexample-env
+          application_name: Mycicd
+          environment_name: Mycicd-env
           version_label: v-${{ github.run_number }}
           region: ap-south-1
           deployment_package: deploy.zip
