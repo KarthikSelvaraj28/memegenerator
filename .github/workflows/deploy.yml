@@ -24,11 +24,9 @@ jobs:
       - name: Build React app
         run: npm run build
 
-      - name: Package build folder
+      - name: Package app for deployment
         run: |
-          cd build
-          zip -r ../deploy.zip .
-          cd ..
+          zip -r deploy.zip build server.js package.json Procfile
 
       - name: Verify deploy.zip exists
         run: ls -lh deploy.zip
@@ -41,8 +39,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: CICDpipeline             
-          environment_name: CICDpipeline-env         
+          application_name: Pipeline
+          environment_name: Pipeline-env
           version_label: v-${{ github.run_number }}
           region: ap-south-1
           deployment_package: deploy.zip
