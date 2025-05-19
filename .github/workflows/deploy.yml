@@ -3,7 +3,7 @@ name: Deploy React App to AWS Elastic Beanstalk
 on:
   push:
     branches:
-      - main   # or your branch name
+      - main   # Trigger on push to main branch
 
 jobs:
   deploy:
@@ -30,10 +30,10 @@ jobs:
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v20
       with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: YourElasticBeanstalkAppName
-        environment_name: YourElasticBeanstalkEnvName
-        region: your-region-1
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+        application_name: ${{ secrets.EB_APP_NAME }}
+        environment_name: ${{ secrets.EB_ENV_NAME }}
+        region: ap-south-1              # ✅ update this to your region if different
         version_label: v-${{ github.run_number }}
         deployment_package: deploy.zip
