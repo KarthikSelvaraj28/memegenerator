@@ -3,7 +3,7 @@ name: Deploy React App to AWS Elastic Beanstalk
 on:
   push:
     branches:
-      - main   # Trigger on push to main branch
+      - main  
 
 jobs:
   deploy:
@@ -34,6 +34,6 @@ jobs:
         aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
         application_name: ${{ secrets.EB_APP_NAME }}
         environment_name: ${{ secrets.EB_ENV_NAME }}
-        region: ap-south-1              # ✅ update this to your region if different
+        region: ap-south-1              
         version_label: v-${{ github.run_number }}
         deployment_package: deploy.zip
