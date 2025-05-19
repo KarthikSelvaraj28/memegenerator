@@ -41,8 +41,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: Karthikcicd
-          environment_name: Karthikcicd-env
+          application_name: CICDpipeline             
+          environment_name: CICDpipeline-env         
           version_label: v-${{ github.run_number }}
           region: ap-south-1
           deployment_package: deploy.zip
