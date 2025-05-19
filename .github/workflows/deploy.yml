@@ -10,30 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout source code
-      uses: actions/checkout@v3
+      - name: Checkout source code
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build React app
-      run: npm run build
+      - name: Build React app
+        run: npm run build
 
-    - name: Generate ZIP file for deployment
-      run: zip -r deploy.zip build
+      - name: Generate ZIP file for deployment
+        run: zip -r deploy.zip build
 
-    - name: Deploy to Elastic Beanstalk
-      uses: einaregilsson/beanstalk-deploy@v20
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: MyCiCd Project
-        environment_name: MyCiCdProject-env
-        region: ap-south-1
-        version_label: ${{ github.sha }}
-        deployment_package: deploy.zip
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          application_name: MyCiCd Project
+          environment_name: MyCiCdProject-env
+          version_label: ${{ github.sha }}
+          region: ap-south-1
+          bucket_name: elasticbeanstalk-ap-south-1-890771280219  
+          bucket_key: deploy.zip
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
