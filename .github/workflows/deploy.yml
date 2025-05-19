@@ -1,28 +1,39 @@
-name: Deploy to Elastic Beanstalk
+name: Deploy React App to AWS Elastic Beanstalk
 
 on:
   push:
     branches:
-      - main
+      - main   # or your branch name
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout source code
+      uses: actions/checkout@v3
 
-      - name: Zip files for deployment
-        run: zip -r deploy.zip . -x '*.git*'
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
 
-      - name: Deploy to AWS Elastic Beanstalk
-        uses: einaregilsson/beanstalk-deploy@v22
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          application_name: MyCiCd Project
-          environment_name: MyCiCdProject-env
-          region: ap-south-1
-          version_label: ${{ github.sha }}
-          deployment_package: deploy.zip
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build React app
+      run: npm run build
+
+    - name: Generate ZIP file for deployment
+      run: zip -r deploy.zip build
+
+    - name: Deploy to Elastic Beanstalk
+      uses: einaregilsson/beanstalk-deploy@v20
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: YourElasticBeanstalkAppName
+        environment_name: YourElasticBeanstalkEnvName
+        region: your-region-1
+        version_label: v-${{ github.run_number }}
+        deployment_package: deploy.zip
