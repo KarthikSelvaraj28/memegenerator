@@ -27,8 +27,14 @@ jobs:
       - name: Package build folder
         run: |
           cd build
-          zip -r ../deploy.zip .  # zip contents of build folder (not folder itself)
+          zip -r ../deploy.zip .
           cd ..
+
+      - name: Verify deploy.zip exists
+        run: ls -lh deploy.zip
+
+      - name: List deploy.zip contents
+        run: unzip -l deploy.zip
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
