@@ -34,7 +34,6 @@ jobs:
           environment_name: MyCiCdProject-env
           version_label: ${{ github.sha }}
           region: ap-south-1
-          bucket_name: elasticbeanstalk-ap-south-1-890771280219  
-          bucket_key: deploy.zip
+          deployment_package: deploy.zip
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
