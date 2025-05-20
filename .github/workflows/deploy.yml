@@ -24,9 +24,14 @@ jobs:
       - name: Build React app
         run: npm run build
 
-      - name: Package app for deployment
+      - name: Package app for deployment (including .ebextensions)
         run: |
-          zip -r deploy.zip build server.js package.json Procfile
+          mkdir deploy
+          cp -r build/* deploy/
+          cp server.js package.json Procfile -t deploy/
+          cp -r .ebextensions deploy/
+          cd deploy
+          zip -r ../deploy.zip .
 
       - name: Verify deploy.zip exists
         run: ls -lh deploy.zip
